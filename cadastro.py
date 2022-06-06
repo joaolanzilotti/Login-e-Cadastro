@@ -38,13 +38,13 @@ def janela_nova():
     janela_login = Tk()
     janela_login.geometry('415x550+750+250')
     janela_login.title('LOGIN JP')
-    janela_login.iconbitmap('imagens-icones/login.ico')
+    janela_login.iconbitmap('Login-e-Cadastro/imagens-icones/login.ico')
     janela_login.configure(bg='#151515')
 
     janela_login2 = Frame(janela_login, width=400, height=600, bg='#151515', bd=0)
     janela_login2.place(x=30,y=20)
 
-    imagem_titulo = Image.open('imagens-icones/Titulo imagem3.png')
+    imagem_titulo = Image.open('Login-e-Cadastro/imagens-icones/Titulo imagem3.png')
     imagem_titulo  = imagem_titulo.resize((300,500))
     imagem_titulo  = ImageTk.PhotoImage(imagem_titulo)
     imagem_titulo2 = Label(janela_login2, image=imagem_titulo, bg='#151515', bd=0)
@@ -52,7 +52,7 @@ def janela_nova():
     texto_titulo = Label(janela_login, text='Seja Bem Vindo',bg='#242424',foreground='white', font=('Lucky Skirt Regular',16))
     texto_titulo.place(x=135,y=120)
 
-    Imagem_Email = Image.open('imagens-icones/Figura Usuario.png')
+    Imagem_Email = Image.open('Login-e-Cadastro/imagens-icones/Figura Usuario.png')
     Imagem_Email  = Imagem_Email .resize((250,40))
     Imagem_Email  = ImageTk.PhotoImage(Imagem_Email)
     Imagem_Email1 = Label(janela_login2, image=Imagem_Email,bg='#242424', bd=0)
@@ -64,7 +64,7 @@ def janela_nova():
     Caixa_Email.focus()
     Caixa_Email.place(x=90, y=215)
 
-    Imagem_Senha = Image.open('imagens-icones/Figura Senha.png')
+    Imagem_Senha = Image.open('Login-e-Cadastro/imagens-icones/Figura Senha.png')
     Imagem_Senha  = Imagem_Senha .resize((250,40))
     Imagem_Senha  = ImageTk.PhotoImage(Imagem_Senha)
     Imagem_Senha1 = Label(janela_login2, image=Imagem_Senha, bg='#242424')
@@ -75,7 +75,7 @@ def janela_nova():
     caixa_senha.config(width=22,bd=0,  relief='solid', font=('',12),justify='left', show='*')
     caixa_senha.place(x=90, y=313)
 
-    imagemlogin = Image.open('imagens-icones/botao login.png')
+    imagemlogin = Image.open('Login-e-Cadastro/imagens-icones/botao login.png')
     imagemlogin  = imagemlogin .resize((130,45))
     imagemlogin  = ImageTk.PhotoImage(imagemlogin )
     botao_login= Button(janela_login2, image=imagemlogin,bg='#242424', anchor='nw',bd=0,activebackground="#242424", command='')
@@ -94,7 +94,7 @@ def tela_inicial():
     janela = Tk()
     janela.geometry('415x550+750+250')
     janela.title('Cadastro JP')
-    janela.iconbitmap('imagens-icones/login.ico')
+    janela.iconbitmap('Login-e-Cadastro/imagens-icones/login.ico')
     janela.configure(bg='#151515')
 
     janela_cadastro = Frame(janela, width=400, height=600, bg='#151515', bd=0)
@@ -122,7 +122,7 @@ def tela_inicial():
                 print("erro ao cadastrar")      
 
 
-    Imagem_Titulo = Image.open('imagens-icones/Titulo imagem3.png')
+    Imagem_Titulo = Image.open('Login-e-Cadastro/imagens-icones/Titulo imagem3.png')
     Imagem_Titulo  = Imagem_Titulo .resize((300,500))
     Imagem_Titulo  = ImageTk.PhotoImage(Imagem_Titulo)
 
@@ -132,7 +132,7 @@ def tela_inicial():
     texto_titulo = Label(janela, text='Crie Sua Conta',bg='#242424',foreground='white', font=('Lucky Skirt Regular',16))
     texto_titulo.place(x=135,y=120)
 
-    Imagem_usuario = Image.open('imagens-icones/Figura Usuario.png')
+    Imagem_usuario = Image.open('Login-e-Cadastro/imagens-icones/Figura Usuario.png')
     Imagem_usuario  = Imagem_usuario .resize((250,40))
     Imagem_usuario  = ImageTk.PhotoImage(Imagem_usuario)
 
@@ -146,7 +146,7 @@ def tela_inicial():
     caixa_nome.focus()
     caixa_nome.place(x=90, y=194)
 
-    Imagem_email = Image.open('imagens-icones/Figura email.png')
+    Imagem_email = Image.open('Login-e-Cadastro/imagens-icones/Figura email.png')
     Imagem_email  = Imagem_email .resize((250,40))
     Imagem_email  = ImageTk.PhotoImage(Imagem_email)
 
@@ -159,7 +159,7 @@ def tela_inicial():
     caixa_email.config(width=22,bd=0, font=('',12),justify='left')
     caixa_email.place(x=90, y=274)
 
-    Imagem_Senha = Image.open('imagens-icones/Figura Senha.png')
+    Imagem_Senha = Image.open('Login-e-Cadastro/imagens-icones/Figura Senha.png')
     Imagem_Senha  = Imagem_Senha .resize((250,40))
     Imagem_Senha  = ImageTk.PhotoImage(Imagem_Senha)
 
@@ -186,7 +186,7 @@ def tela_inicial():
     botao_facalogin = Button(janela_cadastro,text='Já possui conta? Faça Login',font=('Arial',11),bd=0, background='#242424', activebackground='#242424', foreground='white',command=voltarlogin)
     botao_facalogin.place(x=78, y=458)
     # --------------------------- BOTÃO CADASTRO COM IMAGEM --------------------------- #
-    imagemcadastro = Image.open('imagens-icones/botao2.png')
+    imagemcadastro = Image.open('Login-e-Cadastro/imagens-icones/botao2.png')
     imagemcadastro  = imagemcadastro .resize((110,45))
     imagemcadastro  = ImageTk.PhotoImage(imagemcadastro )
 
