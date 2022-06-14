@@ -16,13 +16,16 @@
 
 # Para executar uma def use: tela_inicial()
 
-
+import email
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 import mysql.connector
 import time
+import tkinter.messagebox as MessageBox
+from tkinter.messagebox import showinfo
+import mysql.connector as mysql
 
 def voltarlogin():
     janela.destroy()
@@ -33,6 +36,76 @@ def voltarcadastro():
     janela_login.destroy()
     time.sleep(0.2)
     tela_inicial()
+
+def logar():
+    global Email
+    global Senha
+    Email = Caixa_Email2.get()
+    Senha = caixa_senha2.get()
+
+    if(Email =="" or Senha==""):
+        MessageBox.showinfo("Status", "Todos os campos são requeridos")
+    else:
+        #Conexão e Entrada de dados no banco
+        con = mysql.connect(host="localhost", user="root", password="", database="cadastro")
+        cursor = con.cursor()
+        #Decisão se o usuario é cadastrado ou não 
+        try:
+          cursor.execute("select Email from clientes where Email  = '"+ Caixa_Email2.get() +"' and Senha = '"+ caixa_senha2.get() +"'")
+          teste22 = cursor.fetchall()
+          
+          if Caixa_Email2.get() == (f"{teste22[0][0]}"):
+            Caixa_Email2.delete(0, 'end')
+            caixa_senha2.delete(0, 'end')
+            con.close();
+            janela_login.destroy()
+            #Janela Adminstrador
+            admin = Tk()
+            admin.geometry("415x550+750+250");
+            admin.title("Programa JP");
+            administrador()
+            teste1 = Label(admin, text="Pagina Cliente", font=("uppercase",30))
+            teste1.place(x=130, y=100)
+            print(Email)
+            print(Senha)
+            
+            
+          else:
+              Caixa_Email2.delete(0, 'end')
+              caixa_senha2.delete(0, 'end')
+              MessageBox.showinfo("Status", "Login Inválido")
+          
+        except:
+            #------------------------------------
+            #Após confirmar, apaga as linhas
+            Caixa_Email2.delete(0, 'end')
+            caixa_senha2.delete(0, 'end')
+    
+            #-------------------------------
+            #Janela, Inserido com sucesso
+            MessageBox.showinfo("Status", "Login inválido")
+            con.close();
+            #------------------------------
+    return Email, Senha
+def administrador():
+        
+    #Conexão e Entrada de dados no banco
+        con = mysql.connect(host="localhost", user="root", password="", database="cadastro")
+        cursor = con.cursor()
+        #Decisão se o usuario é cadastrado ou não 
+        
+        try:
+          cursor.execute("select Email from clientes where Email  = '"+ Email +"' and senha = '"+ Senha +"'")
+          teste23 = cursor.fetchall()
+          
+          print(teste23[0][0])
+          
+        except:
+            #------------------------------------
+            #Após confirmar, apaga as linhas
+            print("Erro")
+
+
 def janela_nova():
     global janela_login
     janela_login = Tk()
@@ -59,10 +132,11 @@ def janela_nova():
     Imagem_Email1.place(x=50, y=205)
     texto_Email = Label(janela_login2, text='Email: * ',font=('Simply Olive Regular',17), background='#242424', bd=0, foreground='white')
     texto_Email.place(x=70, y=171)
-    Caixa_Email = Entry(janela_login2)
-    Caixa_Email.config(width=22,bd=0,  relief='solid', font=('',12),justify='left')
-    Caixa_Email.focus()
-    Caixa_Email.place(x=90, y=215)
+    global Caixa_Email2
+    Caixa_Email2 = Entry(janela_login2)
+    Caixa_Email2.config(width=22,bd=0,  relief='solid', font=('',12),justify='left')
+    Caixa_Email2.focus()
+    Caixa_Email2.place(x=90, y=215)
 
     Imagem_Senha = Image.open('Login-e-Cadastro/imagens-icones/Figura Senha.png')
     Imagem_Senha  = Imagem_Senha .resize((250,40))
@@ -71,14 +145,15 @@ def janela_nova():
     Imagem_Senha1.place(x=50, y=300)
     texto_senha = Label(janela_login2, text='Senha: *',font=('Simply Olive Regular',17), background='#242424', bd=0, foreground='white')
     texto_senha.place(x=70, y=265)
-    caixa_senha = Entry(janela_login2)
-    caixa_senha.config(width=22,bd=0,  relief='solid', font=('',12),justify='left', show='*')
-    caixa_senha.place(x=90, y=313)
+    global caixa_senha2
+    caixa_senha2 = Entry(janela_login2)
+    caixa_senha2.config(width=22,bd=0,  relief='solid', font=('',12),justify='left', show='*')
+    caixa_senha2.place(x=90, y=313)
 
     imagemlogin = Image.open('Login-e-Cadastro/imagens-icones/botao login.png')
     imagemlogin  = imagemlogin .resize((130,45))
     imagemlogin  = ImageTk.PhotoImage(imagemlogin )
-    botao_login= Button(janela_login2, image=imagemlogin,bg='#242424', anchor='nw',bd=0,activebackground="#242424", command='')
+    botao_login= Button(janela_login2, image=imagemlogin,bg='#242424', anchor='nw',bd=0,activebackground="#242424", command=logar)
     botao_login.place(x=110,y=360)
 
     botao_esqueceusenha = Button(janela_login2,text='Esqueceu a sua Senha?',font=('Arial',11),bd=0, background='#242424', activebackground='#242424', foreground='white')
@@ -87,6 +162,7 @@ def janela_nova():
     botao_criarconta = Button(janela_login2,text='Criar Conta',font=('Arial',11),bd=0, background='#242424', activebackground='#242424', foreground='white', command=voltarcadastro)
     botao_criarconta.place(x=130, y=458)
     janela_login.mainloop()
+
 
 
 def tela_inicial():
@@ -103,8 +179,8 @@ def tela_inicial():
 
 
     def inserir():
-        if (caixa_nome.get()==""):
-            print("nada")
+        if (caixa_nome.get()=="" or caixa_email.get()=="" or caixa_senha.get()==""):
+            showinfo(title='Atenção', message='Campos Obrigatórios')
         
         else:
 
@@ -145,6 +221,7 @@ def tela_inicial():
     caixa_nome.config(width=22,bd=0,  relief='solid', font=('',12),justify='left')
     caixa_nome.focus()
     caixa_nome.place(x=90, y=194)
+
 
     Imagem_email = Image.open('Login-e-Cadastro/imagens-icones/Figura email.png')
     Imagem_email  = Imagem_email .resize((250,40))
